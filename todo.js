@@ -45,29 +45,34 @@ const getThingsToDo = function (todos) {
 }
 
 sortTodos(todos)
-console.log(todos)
 
-// console.log(getThingsToDo(todos))
+const filters = {
+  searchText: ''
+}
 
-// deleteTodo(todos, 'buy food')
-// console.log(todos)
+const renderTodos = function (todos, filters) {
+  const filteredTodos = todos.filter(function (todo) {
+    return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+  })
 
-// You have 2 todos left
-// Add a p for each todo (use text value)
+  const incompleteTodos = filteredTodos.filter(function (todo) {
+    return !todo.completed
+  })
 
-const incompleteTodos = todos.filter(function (todo) {
-  return !todo.completed
-})
+  document.querySelector('#todos').innerHTML = ''
 
-const summary = document.createElement('h2')
-summary.textContent = `You have ${incompleteTodos.length} left`
-document.querySelector('body').appendChild(summary)
+  const summary = document.createElement('h2')
+  summary.textContent = `You have ${incompleteTodos.length} left`
+  document.querySelector('#todos').appendChild(summary)
 
-todos.forEach(function (todo) {
-  const p = document.createElement('p')
-  p.textContent = todo.text
-  document.querySelector('body').appendChild(p)
-})
+  filteredTodos.forEach(function (todo) {
+    const p = document.createElement('p')
+    p.textContent = todo.text
+    document.querySelector('#todos').appendChild(p)
+  })
+}
+
+renderTodos(todos, filters)
 
 document.querySelector('#add-todo').addEventListener('click', function (e) {
   console.log('Add a new todo')
@@ -75,4 +80,9 @@ document.querySelector('#add-todo').addEventListener('click', function (e) {
 
 document.querySelector('#new-todo-text').addEventListener('input', function (e) {
   console.log(e.target.value)
+})
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+  filters.searchText = e.target.value
+  renderTodos(todos, filters)
 })
