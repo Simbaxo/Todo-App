@@ -1,4 +1,3 @@
-// Convert array to array of objects -> text, completed
 const todos = [{
   text: 'Order Cat Food',
   completed: true
@@ -52,3 +51,20 @@ console.log(todos)
 
 // deleteTodo(todos, 'buy food')
 // console.log(todos)
+
+// You have 2 todos left
+// Add a p for each todo (use text value)
+
+const incompleteTodos = todos.filter(function (todo) {
+  return !todo.completed
+})
+
+const summary = document.createElement('h2')
+summary.textContent = `You have ${incompleteTodos.length} left`
+document.querySelector('body').appendChild(summary)
+
+todos.forEach(function (todo) {
+  const p = document.createElement('p')
+  p.textContent = todo.text
+  document.querySelector('body').appendChild(p)
+})
