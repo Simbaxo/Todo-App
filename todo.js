@@ -1,4 +1,4 @@
-// 1. Convert array to array of objects -> text, completed
+// Convert array to array of objects -> text, completed
 const todos = [{
   text: 'Order Cat Food',
   completed: true
@@ -16,7 +16,19 @@ const todos = [{
   completed: true
 }]
 
-// 2. Create function to remove a todo by text value
+const sortTodos = function (todo) {
+  todo.sort(function (a, b) {
+    if (!a.completed && b.completed) {
+      return -1
+    } else if (!b.completed && a.completed) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+}
+
+// Create function to remove a todo by text value
 const deleteTodo = function (todos, todoText) {
   const index = todos.findIndex(function (todo) {
     return todo.text.toLowerCase() === todoText.toLowerCase()
@@ -33,6 +45,10 @@ const getThingsToDo = function (todos) {
   })
 }
 
-console.log(getThingsToDo(todos))
+sortTodos(todos)
+console.log(todos)
+
+// console.log(getThingsToDo(todos))
+
 // deleteTodo(todos, 'buy food')
 // console.log(todos)
