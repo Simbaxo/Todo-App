@@ -26,5 +26,13 @@ const deleteTodo = function (todos, todoText) {
   }
 }
 
-deleteTodo(todos, 'buy food')
-console.log(todos)
+// Find Uncompleted Todos
+const getThingsToDo = function (todos) {
+  return todos.filter(function (todo) {
+    return !todo.completed
+  })
+}
+
+console.log(getThingsToDo(todos))
+// deleteTodo(todos, 'buy food')
+// console.log(todos)
