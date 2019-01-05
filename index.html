@@ -11,16 +11,30 @@
 </head>
 
 <body>
-  <h1>Todo App</h1>
-  <input id="search-text" type="text" placeholder="Filter Todos">
-  <label>
-    <input type="checkbox" id="hide-completed"> Hide Completed
-  </label>
-  <div id="todos"></div>
-  <form id="new-todo">
-    <input type="text" placeholder="Something to do" name="text">
-    <button>Add Todo</button>
-  </form>
+  <div class="header">
+    <div class="container">
+      <h1 class="header__title">Todo App</h1>
+      <h2 class="header__subtitle">What do you need todo?</h2>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="actions__container">
+      <input id="search-text" type="text" class="input" placeholder="Filter Todos">
+      <label class="checkbox">
+        <input type="checkbox" id="hide-completed"> Hide Completed
+      </label>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="todos"></div>
+    <form id="new-todo">
+      <input type="text" class="input" placeholder="Something to do" name="text">
+      <button class="button">Add Todo</button>
+    </form>
+  </div>
+
   <script src="scripts/uuidv4.js"></script>
   <script src="scripts/todo-functions.js"></script>
   <script src="scripts/todo-app.js"></script>
