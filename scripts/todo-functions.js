@@ -36,6 +36,7 @@ const toggleTodo = (id) => {
 
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
+  const todoEl = document.querySelector('#todos')
   const filteredTodos = todos.filter((todo) => {
     const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
     const hideCompletedMatch = !filters.hideCompleted || !todo.completed
@@ -44,12 +45,19 @@ const renderTodos = (todos, filters) => {
 
   const incompleteTodos = filteredTodos.filter((todo) => !todo.completed)
 
-  document.querySelector('#todos').innerHTML = ''
-  document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos))
+  todoEl.innerHTML = ''
+  todoEl.appendChild(generateSummaryDOM(incompleteTodos))
 
-  filteredTodos.forEach((todo) => {
-    document.querySelector('#todos').appendChild(generateTodoDOM(todo))
-  })
+  if (filteredTodos.length > 0) {
+    filteredTodos.forEach((todo) => {
+      todoEl.appendChild(generateTodoDOM(todo))
+    })
+  } else {
+    const messageEl = document.createElement('p')
+    messageEl.classList.add('empty-message')
+    messageEl.textContent = 'No todos to show'
+    todoEl.appendChild(messageEl)
+  }
 }
 
 // Get the DOM elements for an individual note
@@ -95,6 +103,8 @@ const generateTodoDOM = (todo) => {
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incompleteTodos) => {
   const summary = document.createElement('h2')
-  summary.textContent = `You have ${incompleteTodos.length} todos left`
+  const plural = incompleteTodos.length === 1 ? '' : 's'
+  summary.classList.add('list-title')
+  summary.textContent = `You Have ${incompleteTodos.length} Todo${plural} Left`
   return summary
 }
