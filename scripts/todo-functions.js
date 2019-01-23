@@ -1,39 +1,3 @@
-'use strict'
-
-// Fetch existing todos from localStorage
-const getSavedTodos = () => {
-  const todosJSON = localStorage.getItem('todos')
-
-  try {
-    return todosJSON ? JSON.parse(todosJSON) : []
-  } catch (e) {
-    return []
-  }
-}
-
-// Save todos to localStorage
-const saveTodos = (todos) => {
-  localStorage.setItem('todos', JSON.stringify(todos))
-}
-
-// Remove a todo by id
-const removeTodo = (id) => {
-  const todoIndex = todos.findIndex((todo) => todo.id === id)
-
-  if (todoIndex > -1) {
-    todos.splice(todoIndex, 1)
-  }
-}
-
-// Toggle the completed values for a given todo
-const toggleTodo = (id) => {
-  const todo = todos.find((todo) => todo.id === id)
-
-  if (todo) {
-    todo.completed = !todo.completed
-  }
-}
-
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
   const todoEl = document.querySelector('#todos')

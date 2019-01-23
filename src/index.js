@@ -1,8 +1,6 @@
 import { getFilters, setFilters } from './filters'
+import { getTodos, createTodo } from './todos'
 
-console.log(getFilters())
-setFilters({
-  searchText: 'Alexandria',
-  hideCompleted: true
-})
-console.log(getFilters())
+console.log(getTodos())
+createTodo('Finish another video')
+console.log(getTodos())
